@@ -1,7 +1,7 @@
 import React, { useRef } from 'react'
 
 import { ReactComponent as LogoSvg } from "./../../assets/img/logo.svg";
-import { useLandingAnimation } from './../../hooks/useLandingAnimation'
+import { useLandingAnimation } from '../../hooks/useLandingAnimation'
 import './style.scss'
 
 

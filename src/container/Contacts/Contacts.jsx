@@ -1,18 +1,47 @@
-import React, { Fragment} from 'react'
+import React, {Fragment, useCallback, useEffect, useState} from 'react'
 
 import './style.scss'
 import FilterBar from '../../components/FilterBar'
 import Contact from '../../components/Contact'
-import { useUserList } from '../../hooks/useUsers'
+import {getUsers} from "../../services/api";
 
 const Contacts = () => {
 
-    const users = useUserList()
+    const [users, setUsers] = useState([])
+    const [filterFn, setFilterFn] = useState(() => () => true)
+
+    async function fetchUsers(){
+        return await getUsers()
+    }
+
+    const filterUsers = useCallback(({ value, key }) =>{
+
+        const filteredFn = !value
+            ? () => () => true
+            : () => user => user[key].toString().toLowerCase().includes(value.toString().toLowerCase())
+
+        setFilterFn(filteredFn)
+    },[filterFn])
+
+    const sortUsers = useCallback(({ direction, key }) =>{
+        const sortedUsers = users.sort((a,b) => a[key] > b[key] && direction === 'up' ? 1 : -1)
+
+        setUsers([ ...sortedUsers ])
+    },[users])
+
+    useEffect(() => {
+        fetchUsers()
+            .then(users => {
+                setUsers(users)
+            })
+    },[])
 
     return (
         <Fragment>
             <div className="container">
-                <FilterBar />
+                <FilterBar
+                    onChangeSort={sortUsers}
+                    onChangeFilter={filterUsers}/>
             </div>
 
             <div className="container">
@@ -27,7 +56,9 @@ const Contacts = () => {
                     <span className="contact__data">Departamento</span>
                     </article>
 
-                    {users.map(user => <Contact user={user} key={user.id}/> )}
+                    {users
+                        .filter(filterFn)
+                        .map(user => <Contact user={user} key={user.id}/> )}
 
                 </section>
             </div>

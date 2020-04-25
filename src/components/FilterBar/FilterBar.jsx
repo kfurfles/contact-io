@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react'
+import React, {useCallback, useEffect, useState} from 'react'
 import Button from '../Button'
 import Input from '../Input'
 
@@ -27,16 +27,11 @@ const initialState = Object.freeze({
     }
 })
 
-const FilterBar = () => {
+const FilterBar = ({ onChangeFilter, onChangeSort }) => {
 
-    const [
-        filterState, setFilterState
-    ] = useState(initialState)
-
-    useEffect(() =>{
-        setActiveFilter(initialState.name, 'name')
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    },[])
+    const [ filterState, setFilterState ] = useState(initialState)
+    const [filter, setFilter] = useState({})
+    const [search, setSearch] = useState('');
 
     const {
         name,
@@ -59,7 +54,7 @@ const FilterBar = () => {
             }
         } else {
             newFilterKeyValue = {
-                direction: true,
+                direction: 'up',
                 selected: true,
             }
         }
@@ -70,12 +65,30 @@ const FilterBar = () => {
                 ...newFilterKeyValue
             }
         })
+        setFilter({ ...newFilterKeyValue, key: filterKey})
+        setSearch('')
+        onChangeSort({ key: filterKey, direction: newFilterKeyValue.direction })
     }
+
+    const setSearchFilter = useCallback(e =>{
+        const value = e.target.value
+        setSearch(value)
+        onChangeFilter({ value, ...filter })
+    },[filter])
+
+    useEffect(() =>{
+        setActiveFilter(initialState.name, 'name')
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    },[])
 
     return (
         <section className="filters">
         <div className="filters__search">
-            <Input className="filters__search__input" type="text"  placeholder="Pesquisar" />
+            <Input
+                value={search}
+                onChange={setSearchFilter}
+                className="filters__search__input"
+                type="text"  placeholder="Pesquisar" />
 
             <button className="filters__search__icon">
                 <i className="fa fa-search"/>
