@@ -4,7 +4,7 @@ import Input from '../Input'
 
 import './style.scss'
 
-const initialState = Object.freeze({
+const initialState = {
     name: {
         selected: false,
         direction: 'down'
@@ -25,7 +25,7 @@ const initialState = Object.freeze({
         selected: false,
         direction: 'down'
     }
-})
+}
 
 const FilterBar = ({ onChangeFilter, onChangeSort }) => {
 
@@ -74,6 +74,7 @@ const FilterBar = ({ onChangeFilter, onChangeSort }) => {
         const value = e.target.value
         setSearch(value)
         onChangeFilter({ value, ...filter })
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     },[filter])
 
     useEffect(() =>{

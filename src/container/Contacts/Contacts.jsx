@@ -21,6 +21,7 @@ const Contacts = () => {
             : () => user => user[key].toString().toLowerCase().includes(value.toString().toLowerCase())
 
         setFilterFn(filteredFn)
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     },[filterFn])
 
     const sortUsers = useCallback(({ direction, key }) =>{

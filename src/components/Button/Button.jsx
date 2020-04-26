@@ -19,7 +19,7 @@ const Button = ({ selected, direction, children, ...props }) => {
 
 Button.defaultProps = {
     selected: false,
-    direction: true
+    direction: 'is-down'
 }
 
 export default Button
