@@ -20,19 +20,19 @@ const Header = () => {
         anime.timeline({
             targets: '.contact-logo .st1',
         })
-            .add({
-                strokeDashoffset: [anime.setDashoffset, 0],
-                easing: 'easeInOutSine',
-                duration: 1500,
-                delay: function (el, i) {
-                    return i * 250
-                },
-            })
-            .add({
-                fill: ['rgba(0,0,0,0)', '#4C84FF'],
-                easing: 'easeInOutSine',
-                duration: 1000
-            })
+        .add({
+            strokeDashoffset: [anime.setDashoffset, 0],
+            easing: 'easeInOutSine',
+            duration: 1500,
+            delay: function (el, i) {
+                return i * 250
+            },
+        })
+        .add({
+            fill: ['rgba(0,0,0,0)', '#4C84FF'],
+            easing: 'easeInOutSine',
+            duration: 1000
+        })
 
         Promise.all([
             anime({
