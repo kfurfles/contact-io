@@ -1,8 +1,9 @@
 import React from 'react'
+import {IButton } from './IButton'
 
 import './style.scss'
 
-const Button = ({ selected, direction, children, ...props }) => {
+const Button: React.FC<IButton> = ({ selected, direction, children, ...props }) => {
     const flow = selected && direction === 'up' ? 'fas fa-sort-up' : 'fas fa-sort-down'
 
     const selectedClassName = selected ? 'is-selected' : ''
@@ -19,7 +20,7 @@ const Button = ({ selected, direction, children, ...props }) => {
 
 Button.defaultProps = {
     selected: false,
-    direction: 'is-down'
+    direction: 'down'
 }
 
 export default Button

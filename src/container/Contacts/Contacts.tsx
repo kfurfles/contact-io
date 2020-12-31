@@ -3,28 +3,27 @@ import React, {Fragment, useCallback, useEffect, useState} from 'react'
 import './style.scss'
 import FilterBar from '../../components/FilterBar'
 import Contact from '../../components/Contact'
-import {getUsers} from "../../services/api";
+import { getUsers } from "../../services/api";
+import { IUser } from '../../interfaces/IUser'
 
 const Contacts = () => {
 
-    const [users, setUsers] = useState([])
-    const [filterFn, setFilterFn] = useState(() => () => true)
+    const [users, setUsers] = useState<IUser[]>([])
+    const [filterFn, setFilterFn] = useState<() => (user: IUser) => boolean>(() => () => true)
 
-    async function fetchUsers(){
-        return await getUsers()
-    }
+    const fetchUsers = () => getUsers()
 
-    const filterUsers = useCallback(({ value, key }) =>{
+    const filterUsers = useCallback(({ value, key }: { value: string, key: keyof IUser }) =>{
 
         const filteredFn = !value
             ? () => () => true
-            : () => user => user[key].toString().toLowerCase().includes(value.toString().toLowerCase())
+            : () => (user: IUser) => user['name'].toString().toLowerCase().includes(value.toString().toLowerCase())
 
         setFilterFn(filteredFn)
         // eslint-disable-next-line react-hooks/exhaustive-deps
     },[filterFn])
 
-    const sortUsers = useCallback(({ direction, key }) =>{
+    const sortUsers = useCallback(({ direction, key }: { direction: 'up' | 'down', key: keyof IUser }) =>{
         const sortedUsers = users.sort((a,b) => a[key] > b[key] && direction === 'up' ? 1 : -1)
 
         setUsers([ ...sortedUsers ])

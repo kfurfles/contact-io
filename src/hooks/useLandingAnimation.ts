@@ -1,7 +1,9 @@
 import { useEffect } from "react"
 import anime from 'animejs'
 
-export function useLandingAnimation(logoRef){
+export function useLandingAnimation(logoRef: any){
+
+    console.log(logoRef);
 
     useEffect(() =>{
 
@@ -16,7 +18,7 @@ export function useLandingAnimation(logoRef){
             strokeDashoffset: [anime.setDashoffset, 0],
             easing: 'easeInOutSine',
             duration: 1500,
-            delay: function(el, i) { return i * 250 },
+            delay: (el,i) => i * 250,
         })
         .add({
             fill: ['rgba(0,0,0,0)', '#4C84FF'],
@@ -24,13 +26,14 @@ export function useLandingAnimation(logoRef){
             duration: 1000
         })
 
+        console.log({ fullLogoWidth, mainLogoWidth })
         Promise.all([
             anime({
                 targets: '.contact-logo',
-                translateX: [parseInt(fullLogoWidth - mainLogoWidth),50],
+                translateX: [fullLogoWidth - mainLogoWidth,50],
                 duration: 1000,
                 easing: 'linear',
-                delay: '2000'
+                delay: 2000
             }).finished,
             anime({
                 targets: '.contact-logo .st0',
@@ -38,7 +41,7 @@ export function useLandingAnimation(logoRef){
                 fill: ['rgba(0,0,0,0)', '#2C3341'],
                 duration: 1000,
                 easing: 'linear',
-                delay: '2000'
+                delay: 2000
             }).finished
         ]).then(() =>{
             anime.timeline({
