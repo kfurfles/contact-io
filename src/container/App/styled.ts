@@ -1,3 +1,6 @@
+import { css } from '@emotion/react'
+
+export default css`
 @import url('https://fonts.googleapis.com/css?family=Open+Sans:400,700&display=swap');
 
 *,
@@ -22,4 +25,4 @@ a {
   color: #000;
   font-weight: bold;
 }
-
+`

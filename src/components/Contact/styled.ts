@@ -1,4 +1,6 @@
-.contact {
+import styled from '@emotion/styled'
+
+export const Contact = styled.article`
     align-items: center;
     background-color: white;
     border-radius: 5px;
@@ -12,25 +14,7 @@
     overflow: hidden;
     padding: 5px;
 
-    &:first-of-type {
-        margin-bottom: 5px;
-        background-color: transparent;
-        border: none;
-        box-shadow: none;
-        padding: 0 5px;
-        font-weight: bold;
-
-        & .contact__avatar {
-            height: 0;
-            border: none;
-        }
-
-        .contact__data:nth-child(2) {
-            color: #000;
-        }
-    }
-
-    &__avatar {
+    .avatar {
         border-radius: 50px;
         height: 35px;
         overflow: hidden;
@@ -43,12 +27,12 @@
         }
     }
 
-    &__data {
+    .data {
         width: calc(100% / 6);
         padding: 0 10px;
 
-        &:nth-child(2) {
+        &:nth-of-type(2) {
             color: #4C84FF;
         }
     }
-}
+`

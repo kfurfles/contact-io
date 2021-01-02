@@ -1,8 +1,7 @@
 import React, {useCallback, useEffect, useState} from 'react'
 import Button from '../Button'
-import Input from '../Input'
 
-import './style.scss'
+import { Container, SearchBox, ButtonFilter,InputFilter } from './styled'
 
 const initialState = {
     name: {
@@ -83,18 +82,18 @@ const FilterBar = ({ onChangeFilter, onChangeSort }) => {
     },[])
 
     return (
-        <section className="filters">
-        <div className="filters__search">
-            <Input
+    <Container>
+        <SearchBox>
+            <InputFilter
                 value={search}
                 onChange={setSearchFilter}
-                className="filters__search__input"
-                type="text"  placeholder="Pesquisar" />
+                type="text"  placeholder="Pesquisar" 
+            />
 
-            <button className="filters__search__icon">
+            <ButtonFilter>
                 <i className="fa fa-search"/>
-            </button>
-        </div>
+            </ButtonFilter>
+        </SearchBox>
 
         <Button {...name} onClick={() => setActiveFilter(name,'name')}>Nome</Button>
 
@@ -102,7 +101,7 @@ const FilterBar = ({ onChangeFilter, onChangeSort }) => {
         <Button {...company} onClick={() => setActiveFilter(name,'company')}>Empresa</Button>
         <Button {...department} onClick={() => setActiveFilter(name,'department')}>Departamento</Button>
         <Button {...admissionDate} onClick={() => setActiveFilter(name,'admissionDate')}>Data de admissão</Button>
-      </section>
+    </Container>
     )
 }
 
