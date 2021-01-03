@@ -1,4 +1,6 @@
-.topbar {
+import styled from '@emotion/styled';
+
+export const Container = styled.header`
     backface-visibility: hidden;
     background-color: white;
     box-shadow: 0 4px 10px rgba(0, 0, 0, .07);
@@ -9,7 +11,15 @@
     width: 100%;
     height: 60px;
 
-    &__logo {
+    .logo-link {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        background: #fff;
+        width: 100%;
+        height: 100%;
+        transform: translate(-50%, -50%);
+        display: flex;
 
         svg {
             height: 100%;
@@ -18,6 +28,7 @@
             .st0{
                 fill: #2C3341;
                 stroke: #2C3341;
+                opacity: 0;
             }
             .st1{
                 fill: transparent;
@@ -29,23 +40,6 @@
 	            .st1{fill:#4C84FF;}
             }
         }
-
-
-        position: fixed;
-        top: 50%;
-        left: 50%;
-        background: #fff;
-        width: 100%;
-        height: 100%;
-        transform: translate(-50%, -50%);
-        display: flex;
-
-        svg{
-            .st0{
-                opacity: 0;
-            }
-        }
-
     }
 
     .container {
@@ -54,4 +48,4 @@
         align-items: center;
         position: relative;
     }
-}
+`

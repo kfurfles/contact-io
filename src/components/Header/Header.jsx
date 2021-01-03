@@ -1,7 +1,7 @@
 import React, {useEffect, useRef} from 'react'
 
 import { ReactComponent as LogoSvg } from "./../../assets/img/logo.svg";
-import './style.scss'
+import { Container } from './styled'
 import anime from "animejs";
 
 
@@ -89,13 +89,13 @@ const Header = () => {
     },[logoEl])
 
     return (
-        <header className="topbar">
+        <Container className="topbar">
             <div className="container">
-                <a href="/" className="topbar__logo" >
-                <LogoSvg alt="Logo Contact" ref={logoEl} className="contact-logo" />
+                <a href="/" className="logo-link" >
+                    <LogoSvg alt="Logo Contact" ref={logoEl} className="contact-logo" />
                 </a>
             </div>
-        </header>
+        </Container>
     )
 }
 

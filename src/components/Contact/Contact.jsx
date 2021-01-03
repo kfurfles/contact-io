@@ -1,10 +1,8 @@
 import React from 'react';
-import './style.scss'
+import { Contact } from './styled'
 import { BrazilianFormatDate } from '../../modules/time';
 
-
-
-const Contact = ({ user }) => {
+const ContactComponent = ({ user }) => {
   const { 
     name, 
     avatar, 
@@ -15,21 +13,22 @@ const Contact = ({ user }) => {
     country 
   } = user
 
-  return (<article className="contact">
-    <span className="contact__avatar">
+  return (
+  <Contact>
+    <span className="avatar">
       <img src={avatar} alt={`avatar ${name}`} />
     </span>
-    <span className="contact__data">{name}</span>
-    <span className="contact__data">{phone}</span>
-    <span className="contact__data">{country}</span>
-    <span className="contact__data">{BrazilianFormatDate(admissionDate)}</span>
-    <span className="contact__data">{company}</span>
-    <span className="contact__data">{department}</span>
-  </article>)
+    <span className="data">{name}</span>
+    <span className="data">{phone}</span>
+    <span className="data">{country}</span>
+    <span className="data">{BrazilianFormatDate(admissionDate)}</span>
+    <span className="data">{company}</span>
+    <span className="data">{department}</span>
+  </Contact>)
 }
 
 
-Contact.defaultProps = {
+ContactComponent.defaultProps = {
   user: {
     "name": "Daniela Terry",
     "avatar": "https://s3.amazonaws.com/uifaces/faces/twitter/shadeed9/128.jpg",
@@ -40,4 +39,4 @@ Contact.defaultProps = {
     "country": "Iceland"
   }
 }
-export default Contact;
+export default ContactComponent;

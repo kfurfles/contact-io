@@ -1,6 +1,7 @@
 import React, {Fragment, useCallback, useEffect, useState} from 'react'
 
-import './style.scss'
+// import './style.scss'
+import { Container, Contacts as ContactsSection, ContactsHeader } from './styled'
 import FilterBar from '../../components/FilterBar'
 import Contact from '../../components/Contact'
 import { getUsers } from "../../services/api";
@@ -38,30 +39,30 @@ const Contacts = () => {
 
     return (
         <Fragment>
-            <div className="container">
+            <Container>
                 <FilterBar
                     onChangeSort={sortUsers}
                     onChangeFilter={filterUsers}/>
-            </div>
+            </Container>
 
-            <div className="container">
-                <section className="contacts">
-                    <article className="contact">
-                    <span className="contact__avatar" />
-                    <span className="contact__data">Nome</span>
-                    <span className="contact__data">Telefone</span>
-                    <span className="contact__data">País</span>
-                    <span className="contact__data">Admissão</span>
-                    <span className="contact__data">Empresa</span>
-                    <span className="contact__data">Departamento</span>
-                    </article>
+            <Container>
+                <ContactsSection>
+                    <ContactsHeader>
+                        <span className="avatar" />
+                        <span className="data">Nome</span>
+                        <span className="data">Telefone</span>
+                        <span className="data">País</span>
+                        <span className="data">Admissão</span>
+                        <span className="data">Empresa</span>
+                        <span className="data">Departamento</span>
+                    </ContactsHeader>
 
                     {users
                         .filter(filterFn)
                         .map(user => <Contact user={user} key={user.id}/> )}
 
-                </section>
-            </div>
+                </ContactsSection>
+            </Container>
         </Fragment>
     )
 }
